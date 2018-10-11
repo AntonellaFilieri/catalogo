@@ -1,15 +1,8 @@
 package com.shop;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class PlainTextReceipt implements Receipt {
-
-	private static Object[][] people = { { "Alice", LocalDate.of(2000, Month.JANUARY, 1) },
-			{ "Bob", LocalDate.of(1989, Month.DECEMBER, 15) }, { "Carol", LocalDate.of(1992, Month.JULY, 24) },
-			{ "Ted", LocalDate.of(2006, Month.MARCH, 13) }, };
 
 	@Override
 	public void print(Order order) {
