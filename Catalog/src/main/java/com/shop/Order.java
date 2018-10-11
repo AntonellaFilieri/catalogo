@@ -45,4 +45,11 @@ public class Order {
 		this.paymentMode = paymentMode;
 	}
 
+	public List<OrderItem> getOrderItemList() {
+		return orderItemList;
+	}
+
+	public void setOrderItemList(List<OrderItem> orderItemList) {
+		this.orderItemList = orderItemList;
+	}
 }

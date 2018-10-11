@@ -1,32 +1,37 @@
 package com.shop;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class PlainTextReceipt implements Receipt {
 
+	private static Object[][] people = { { "Alice", LocalDate.of(2000, Month.JANUARY, 1) },
+			{ "Bob", LocalDate.of(1989, Month.DECEMBER, 15) }, { "Carol", LocalDate.of(1992, Month.JULY, 24) },
+			{ "Ted", LocalDate.of(2006, Month.MARCH, 13) }, };
+
 	@Override
-	public String print() {
-		String productFormat = "| %1$-20s | ";
-        String quantityFormat = " %2$tb %2$td, %2$tY  | ";
-        String priceFormat = " %3$3s |%n";
-        String format = productFormat.concat(quantityFormat).concat(priceFormat);
-        String line = new String(new char[68]).replace('\0', '-');
+	public void print(Order order) {
 
-        System.out.println(line);
-        System.out.printf("|%s|%s|%s|%n",
-            StringUtils.center("Product", 32),
-            StringUtils.center("Quantity", 16),
-            StringUtils.center("Price", 16));
-        System.out.println(line);
+		String productFormat = "| %1$-62s |";
+		String quantityFormat = " %2$-14d |";
+		String priceFormat = " %3$-14.2f |%n";
+		String format = productFormat.concat(quantityFormat).concat(priceFormat);
+		String line = new String(new char[100]).replace('\0', '-');
 
-//        for (Object[] data : people) {
-//            System.out.printf(format,
-//                data[0], data[1],
-//                ChronoUnit.YEARS.between((LocalDate) data[1], LocalDate.now()));
-//        }
+		System.out.println(line);
+		System.out.printf("|%s|%s|%s|%n", StringUtils.center("Product", 64), StringUtils.center("Quantity", 16),
+				StringUtils.center("Price", 16));
+		System.out.println(line);
 
-        System.out.println(line);
-		return null;
+		for (OrderItem orderItem : order.getOrderItemList()) {
+			String productName = orderItem.getProduct().getProductName();
+			System.out.printf(format, productName.substring(0, Math.min(productName.length(), 62)), orderItem.getQuantity(),
+					orderItem.getProduct().getPrice());
+		}
+
+		System.out.println(line);
 	}
 
 }
