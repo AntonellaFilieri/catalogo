@@ -18,6 +18,7 @@ public class Product {
 	}
 
 	public Product(String productName, double price) {
+		
 		this.productName = productName;
 		this.productOrigin = ProductOrigin.LOCAL;
 		this.price = price;

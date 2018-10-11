@@ -20,14 +20,14 @@ public class TestProductValidator {
 		try {
 			validator.validate(new Product("ABCD", 36.09));
 		} catch (ProductException e) {
-			fail("Should have been valid and therefore not thrown an exception");
+			fail("Valid data and therefore not thrown an exception");
 		}
 	}
 	
 	@Test
 	public void testPriceValidationFail() {
 		try {
-			validator.validate(new Product("ABCD", -36.09));
+			validator.validate(new Product("ABCD", 0));
 		} catch (ProductException e) {
 			 assertTrue(e.getMessage().contains(" Please specify a valid price "));
 		}

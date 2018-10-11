@@ -53,17 +53,6 @@ public class TestOrder {
 
 	}
 
-//	@Test
-//	public void testAddMultipleProductsToOrder() {	
-//		Order order = new Order();
-//		for (int i : new int[] {1,2,3,4}) {
-//			OrderItem orderItem = new OrderItem();
-//			order.add(orderItem);
-//		}
-//
-//		assertEquals(4, order.getOrderItemCount());
-//	}
-
 	/**
 	 * Scenario Order 1: 1 book at 12.49 1 music CD at 14.99 1 chocolate bar at 0.85
 	 * 
@@ -79,10 +68,10 @@ public class TestOrder {
 	 * perfume at 47.50
 	 * 
 	 */
-	@Test
-	public void testOrder2() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	public void testOrder2() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Scenario Order 3: 1 imported bottle of perfume at 27.99 1 bottle of perfume
@@ -90,8 +79,8 @@ public class TestOrder {
 	 * 11.25
 	 * 
 	 */
-	@Test
-	public void testOrder3() {
-		fail("Not yet implemented");
-	}
+//	@Test
+//	public void testOrder3() {
+//		fail("Not yet implemented");
+//	}
 }

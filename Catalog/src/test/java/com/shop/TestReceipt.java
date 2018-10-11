@@ -7,9 +7,10 @@ import org.junit.Test;
 public class TestReceipt {
 
 	@Test
-	public void testEmpyReceipt() {
-		//Receipt receipt = new Receipt();
+	public void testEmptyReceipt() {
+		Receipt receipt = new PlainTextReceipt();
 		
+		assertEquals(null, receipt.print());
 	}
 
 }
