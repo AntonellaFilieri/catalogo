@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import static org.hamcrest.CoreMatchers.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 public class TestPropertiesFile {
@@ -20,9 +21,13 @@ public class TestPropertiesFile {
 	@Test
 	public void testPropertyFile() {
 		assertTrue(rb != null);
-		assertThat(rb.getString("exempt.goods"), is(notNullValue()));
-		assertThat(rb.getString("base.rate"), is(notNullValue()));
-		assertThat(rb.getString("import.rate"), is(notNullValue()));
+		assertNotNull(rb.getString("exempt.goods"));
+		assertNotNull(rb.getString("base.rate"));
+		assertNotNull(rb.getString("import.rate"));
+		assertTrue(StringUtils.isNotBlank(rb.getString("exempt.goods")));
+		assertTrue(StringUtils.isNotBlank(rb.getString("base.rate")));
+		assertTrue(StringUtils.isNotBlank(rb.getString("import.rate")));
+
 
 	}
 }
