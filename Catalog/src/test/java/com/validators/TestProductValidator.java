@@ -3,6 +3,8 @@ package com.validators;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 import com.model.Product;
@@ -18,7 +20,7 @@ public class TestProductValidator {
 	@Test
 	public void testValidationSucceed() {
 		try {
-			validator.validate(new Product("ABCD", 36.09));
+			validator.validate(new Product("ABCD", new BigDecimal("36.09")));
 		} catch (ProductException e) {
 			fail("Valid data and therefore not thrown an exception");
 		}
@@ -27,7 +29,7 @@ public class TestProductValidator {
 	@Test
 	public void testPriceValidationFail() {
 		try {
-			validator.validate(new Product("ABCD", 0));
+			validator.validate(new Product("ABCD", new BigDecimal("-36.09")));
 		} catch (ProductException e) {
 			 assertTrue(e.getMessage().contains(" Please specify a valid price "));
 		}

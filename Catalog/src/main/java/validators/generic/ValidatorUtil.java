@@ -1,5 +1,7 @@
 package validators.generic;
 
+import java.math.BigDecimal;
+
 public class ValidatorUtil {
 	public static final Validation<String> notNullString = GenericValidation.from(s -> s != null);
 
@@ -9,9 +11,9 @@ public class ValidatorUtil {
 
 	public static final Validation<Integer> greaterThanZero = GenericValidation.from(s -> s > 0);
 	
-	public static final Validation<Double> notNullDouble = GenericValidation.from(s -> s != null);
+	public static final Validation<BigDecimal> notNullDouble = GenericValidation.from(s -> s != null);
 
-	public static final Validation<Double> greaterThanZeroDouble = GenericValidation.from(s -> s > 0);
+	public static final Validation<BigDecimal> greaterThanZeroDouble = GenericValidation.from(s -> s.signum() != -1);
 	
 	public static final Validation<String> stringMoreThan(int size) {
 		return GenericValidation.from(s -> ((String) s).length() > size);

@@ -2,6 +2,8 @@ package com.shop;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,12 +34,12 @@ public class TestReceipt {
 	public void testPlainTextReceipt() {
 
 		Order order = new Order();
-		OrderItem orderItem1 = new OrderItem(new Product("Book", 34.28), 2147483647);
+		OrderItem orderItem1 = new OrderItem(new Product("Book", new BigDecimal("34.28")), 2147483647);
 		order.add(orderItem1);
-		OrderItem orderItem2 = new OrderItem(new Product("Spaghetti Food", 5.9), 135);
+		OrderItem orderItem2 = new OrderItem(new Product("Spaghetti Food", new BigDecimal("5.9")), 135);
 		order.add(orderItem2);
 
-		OrderItem orderItem3 = new OrderItem(new Product("CD U2", 0), 1);
+		OrderItem orderItem3 = new OrderItem(new Product("CD U2",new BigDecimal("0")), 1);
 		order.add(orderItem3);
 
 		Receipt receipt = new PlainTextReceipt();

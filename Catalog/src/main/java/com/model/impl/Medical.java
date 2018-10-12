@@ -1,5 +1,7 @@
 package com.model.impl;
 
+import java.math.BigDecimal;
+
 import com.model.Product;
 import com.model.ProductOrigin;
 
@@ -12,11 +14,11 @@ public class Medical extends Product {
 		super(productName);
 	}
 
-	public Medical(String productName, double price) {
+	public Medical(String productName, BigDecimal price) {
 		super(productName, price);
 	}
 	
-	public Medical(String productName, double price, ProductOrigin productOrigin) {
+	public Medical(String productName, BigDecimal price, ProductOrigin productOrigin) {
 		super(productName, price, productOrigin);
 	}	
 }

@@ -2,6 +2,8 @@ package com.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 import com.model.impl.Book;
@@ -25,40 +27,40 @@ public class TestProduct {
 
 	@Test
 	public void testProduct() {
-		
+
 		Book book = new Book("Java for dummies");
 		Food food = new Food("Spaghetti Barilla");
 		Medical medical = new Medical("Aspirina");
-		
+
 		assertEquals("Java for dummies", book.getProductName());
 		assertEquals("Spaghetti Barilla", food.getProductName());
 		assertEquals("Aspirina", medical.getProductName());
 
-		Book book2 = new Book("Java for dummies", 20.23);
-		Food food2 = new Food("Spaghetti Barilla", 12.5);
-		Medical medical2 = new Medical("Aspirina", 8.3);
-		
-		assertEquals("Java for dummies", book2.getProductName());
-		assertEquals(20.23, book2.getPrice(), 0);
-		assertEquals("Spaghetti Barilla", food2.getProductName());
-		assertEquals(12.5, food2.getPrice(), 0);
-		assertEquals("Aspirina", medical2.getProductName());
-		assertEquals(8.3, medical2.getPrice(), 0);
+		Book book2 = new Book("Java for dummies", new BigDecimal("20.23"));
+		Food food2 = new Food("Spaghetti Barilla", new BigDecimal("12.5"));
+		Medical medical2 = new Medical("Aspirina", new BigDecimal("8.3"));
 
-		Book book3 = new Book("Java for dummies", 20.23, ProductOrigin.LOCAL);
-		Food food3 = new Food("Spaghetti Barilla", 12.5, ProductOrigin.IMPORTED);
-		Medical medical3 = new Medical("Aspirina", 8.3, ProductOrigin.LOCAL);
-		
+		assertEquals("Java for dummies", book2.getProductName());
+		assertEquals(new BigDecimal("20.23"), book2.getPrice());
+		assertEquals("Spaghetti Barilla", food2.getProductName());
+		assertEquals(new BigDecimal("12.5"), food2.getPrice());
+		assertEquals("Aspirina", medical2.getProductName());
+		assertEquals(new BigDecimal("8.3"), medical2.getPrice());
+
+		Book book3 = new Book("Java for dummies", new BigDecimal("20.23"), ProductOrigin.LOCAL);
+		Food food3 = new Food("Spaghetti Barilla", new BigDecimal("12.5"), ProductOrigin.IMPORTED);
+		Medical medical3 = new Medical("Aspirina", new BigDecimal("8.3"), ProductOrigin.LOCAL);
+
 		assertEquals("Java for dummies", book3.getProductName());
-		assertEquals(20.23, book3.getPrice(), 0);
+		assertEquals(new BigDecimal("20.23"), book3.getPrice());
 		assertEquals(ProductOrigin.LOCAL, book3.getProductOrigin());
 
 		assertEquals("Spaghetti Barilla", food3.getProductName());
-		assertEquals(12.5, food3.getPrice(), 0);
+		assertEquals(new BigDecimal("12.5"), food3.getPrice());
 		assertEquals(ProductOrigin.IMPORTED, food3.getProductOrigin());
 
 		assertEquals("Aspirina", medical3.getProductName());
-		assertEquals(8.3, medical3.getPrice(), 0);
+		assertEquals(new BigDecimal("8.3"), medical3.getPrice());
 		assertEquals(ProductOrigin.LOCAL, medical3.getProductOrigin());
 
 	}

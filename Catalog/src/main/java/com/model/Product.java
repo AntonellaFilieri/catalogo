@@ -1,30 +1,30 @@
 package com.model;
 
+import java.math.BigDecimal;
+
 public class Product {
 
 	private String productName;
 	private ProductOrigin productOrigin;
-	private Double price;
+	private BigDecimal price;
 
 	public Product() {
 		this.productOrigin = ProductOrigin.LOCAL;
-		this.price = 0.0;
+		this.price = new BigDecimal("0.0");
 	}
 
 	public Product(String productName) {
+		this();
 		this.productName = productName;
-		this.productOrigin = ProductOrigin.LOCAL;
-		this.price = 0.0;
 	}
 
-	public Product(String productName, double price) {
-		
+	public Product(String productName, BigDecimal price) {
 		this.productName = productName;
 		this.productOrigin = ProductOrigin.LOCAL;
 		this.price = price;
 	}
 
-	public Product(String productName, double price, ProductOrigin productOrigin) {
+	public Product(String productName, BigDecimal price, ProductOrigin productOrigin) {
 		this.productName = productName;
 		this.price = price;
 		this.productOrigin = productOrigin;
@@ -46,11 +46,11 @@ public class Product {
 		this.productOrigin = productOrigin;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

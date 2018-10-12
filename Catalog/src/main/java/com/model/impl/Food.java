@@ -1,5 +1,7 @@
 package com.model.impl;
 
+import java.math.BigDecimal;
+
 import com.model.Product;
 import com.model.ProductOrigin;
 
@@ -12,11 +14,11 @@ public class Food extends Product {
 		super(productName);
 	}
 	
-	public Food(String name, double price) {
+	public Food(String name, BigDecimal price) {
 		super(name, price);
 	}
 	
-	public Food(String name, double price, ProductOrigin productOrigin) {
+	public Food(String name, BigDecimal price, ProductOrigin productOrigin) {
 		super(name, price, productOrigin);
 	}	
 
