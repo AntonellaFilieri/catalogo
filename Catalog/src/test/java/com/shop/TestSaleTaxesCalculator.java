@@ -19,7 +19,7 @@ import junitparams.Parameters;
 public class TestSaleTaxesCalculator {
 
 	@Test
-	@Parameters({ "34.697, 6.9394" })
+	@Parameters({ "34.697, 3.4697" })
 	public void testTaxedPriceOnProduct(BigDecimal price, BigDecimal expectedTaxes) {
 		Product parfume = new Product("Dior", price);
 		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
