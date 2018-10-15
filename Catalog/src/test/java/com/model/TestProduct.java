@@ -5,10 +5,17 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.model.impl.Book;
 import com.model.impl.Food;
 import com.model.impl.Medical;
+import com.shop.tax.BaseSaleTax;
+import com.shop.tax.SaleTaxesCalculator;
+import com.shop.tax.TaxesPolicy;
+
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 
 public class TestProduct {
 
@@ -99,5 +106,7 @@ public class TestProduct {
 		assertEquals(true, medical.isImported());
 
 	}
+	
+
 
 }

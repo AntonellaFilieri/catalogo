@@ -3,6 +3,7 @@ package com.shop;
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Rule;
@@ -39,7 +40,7 @@ public class TestReceipt {
 		OrderItem orderItem2 = new OrderItem(new Product("Spaghetti Food", new BigDecimal("5.9")), 135);
 		order.add(orderItem2);
 
-		OrderItem orderItem3 = new OrderItem(new Product("CD U2",new BigDecimal("0")), 1);
+		OrderItem orderItem3 = new OrderItem(new Product("CD U2", new BigDecimal("0")), 1);
 		order.add(orderItem3);
 
 		Receipt receipt = new PlainTextReceipt();
@@ -50,8 +51,10 @@ public class TestReceipt {
 		String result = separator.concat("\r\n").concat("|").concat(StringUtils.center("Product", 64)).concat("|")
 				.concat(StringUtils.center("Quantity", 16)).concat("|").concat(StringUtils.center("Price", 16))
 				.concat("|").concat("\r\n").concat(separator).concat("\r\n");
-
-		for (OrderItem orderItem : order.getOrderItemList()) {
+		Iterator<OrderItem> iterator = order.iterator();
+		
+		while (iterator.hasNext()) {
+			OrderItem orderItem = iterator.next();
 			String productName = orderItem.getProduct().getProductName();
 			productName = productName.substring(0, Math.min(productName.length(), 62));
 			String productNameSpacing = new String(new char[62 - productName.length()]).replace('\0', ' ');

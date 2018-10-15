@@ -1,5 +1,7 @@
 package com.shop;
 
+import java.util.Iterator;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class PlainTextReceipt implements Receipt {
@@ -18,7 +20,9 @@ public class PlainTextReceipt implements Receipt {
 				StringUtils.center("Price", 16));
 		System.out.println(line);
 
-		for (OrderItem orderItem : order.getOrderItemList()) {
+		Iterator<OrderItem> iterator = order.iterator();
+		while (iterator.hasNext()) {
+			OrderItem orderItem = iterator.next();
 			String productName = orderItem.getProduct().getProductName();
 			System.out.printf(format, productName.substring(0, Math.min(productName.length(), 62)), orderItem.getQuantity(),
 					orderItem.getProduct().getPrice());

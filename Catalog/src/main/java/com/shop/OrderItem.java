@@ -1,16 +1,21 @@
 package com.shop;
 
+import java.math.BigDecimal;
+
 import com.model.Product;
 
 public class OrderItem {
 
 	private Long id;
-
-	private int quantity;
-
-	private Order order;
-
 	private Product product;
+	private int quantity;
+	private BigDecimal totalPrice;
+
+
+	private BigDecimal totalTax;
+	private BigDecimal totalAmount;
+
+
 
 	public OrderItem() {
 	}
@@ -19,7 +24,7 @@ public class OrderItem {
 		this.product = product;
 		this.quantity = quantity;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -43,13 +48,14 @@ public class OrderItem {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-	public Order getOrder() {
-		return order;
+	
+	public BigDecimal getTotalPrice() {
+		this.totalPrice = this.product.getPrice().multiply(new BigDecimal(this.quantity));
+		return totalPrice;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }

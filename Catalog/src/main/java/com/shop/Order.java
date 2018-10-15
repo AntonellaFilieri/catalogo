@@ -1,16 +1,17 @@
 package com.shop;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Order {
+public class Order extends LinkedList<OrderItem>{
 
 	private String orderName;
 	private OrderStatus orderStatus;
-	private List<OrderItem> orderItemList = new ArrayList<>();
 	private PaymentMode paymentMode; 
 
 	public Order() {
+		
 	}
 
 	public Order(String orderName) {
@@ -21,13 +22,13 @@ public class Order {
 		return orderName;
 	}
 
-	public int getOrderItemCount() {
-		return orderItemList.size();
-	}
-
-	public void add(OrderItem orderItem) {
-		orderItemList.add(orderItem);
-	}
+//	public int getOrderItemCount() {
+//		return orderItemList.size();
+//	}
+//
+//	public void add(OrderItem orderItem) {
+//		orderItemList.add(orderItem);
+//	}
 
 	public OrderStatus getOrderStatus() {
 		return orderStatus;
@@ -45,11 +46,11 @@ public class Order {
 		this.paymentMode = paymentMode;
 	}
 
-	public List<OrderItem> getOrderItemList() {
-		return orderItemList;
-	}
-
-	public void setOrderItemList(List<OrderItem> orderItemList) {
-		this.orderItemList = orderItemList;
-	}
+//	public List<OrderItem> getOrderItemList() {
+//		return orderItemList;
+//	}
+//
+//	public void setOrderItemList(List<OrderItem> orderItemList) {
+//		this.orderItemList = orderItemList;
+//	}
 }

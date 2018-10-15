@@ -54,7 +54,7 @@ public class Product {
 		this.price = price;
 	}
 
-	public Object isImported() {
+	public boolean isImported() {
 		return this.productOrigin == ProductOrigin.IMPORTED;
 	}
 

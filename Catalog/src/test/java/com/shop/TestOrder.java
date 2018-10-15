@@ -11,7 +11,7 @@ public class TestOrder {
 	@Test
 	public void testEmptyOrder() {
 		Order order = new Order();
-		assertEquals(0, order.getOrderItemCount());
+		assertEquals(0, order.size());
 	}
 
 	@Test
@@ -19,7 +19,7 @@ public class TestOrder {
 		Order order = new Order();
 		OrderItem orderItem = new OrderItem();
 		order.add(orderItem);
-		assertEquals(1, order.getOrderItemCount());
+		assertEquals(1, order.size());
 		assertEquals(0, orderItem.getQuantity());
 
 	}
@@ -29,7 +29,7 @@ public class TestOrder {
 		Order order = new Order();
 		OrderItem orderItem = new OrderItem(new Product("well book"), 1);
 		order.add(orderItem);
-		assertEquals(1, order.getOrderItemCount());
+		assertEquals(1, order.size());
 		assertEquals(1, orderItem.getQuantity());
 
 	}
@@ -49,7 +49,7 @@ public class TestOrder {
 			assertEquals("well book" + i, orderItem.getProduct().getProductName());
 		}
 
-		assertEquals(orderItemsQuantity, order.getOrderItemCount());
+		assertEquals(orderItemsQuantity, order.size());
 
 	}
 
