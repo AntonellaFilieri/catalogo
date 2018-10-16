@@ -19,14 +19,16 @@ public class TestOrderItem {
 
 		Product product = new Product("book", new BigDecimal("20.3444"));
 		int quantity = 1;
-		BigDecimal expectedTaxedPrice = new BigDecimal("20.3444").multiply(new BigDecimal("10")).divide(new BigDecimal("100")).add(new BigDecimal("20.3444"));
-		OrderItem orderItem = new OrderItem(product, quantity);
+		BigDecimal expectedTaxedPrice = new BigDecimal("20.3444").multiply(new BigDecimal("10"))
+				.divide(new BigDecimal("100")).add(new BigDecimal("20.3444"));
 
 		TaxesPolicy taxesPolicy = new TaxesPolicy();
 		taxesPolicy.add(new BaseSaleTax());
 		taxesPolicy.add(new ImportDutySaleTax());
 
-		assertEquals(expectedTaxedPrice, orderItem.getTotalPrice(taxesPolicy));
+		OrderItem orderItem = new OrderItem(product, quantity);
+
+		assertEquals(expectedTaxedPrice, orderItem.getTotalPrice());
 
 	}
 
@@ -35,14 +37,15 @@ public class TestOrderItem {
 
 		Product product = new Product("book", new BigDecimal("20.3444"));
 		int quantity = 5;
-		BigDecimal expectedTaxedPrice = new BigDecimal("20.3444").multiply(new BigDecimal("10")).divide(new BigDecimal("100")).add(new BigDecimal("20.3444"));
+		BigDecimal expectedTaxedPrice = new BigDecimal("20.3444").multiply(new BigDecimal("10"))
+				.divide(new BigDecimal("100")).add(new BigDecimal("20.3444"));
 		OrderItem orderItem = new OrderItem(product, quantity);
 
 		TaxesPolicy taxesPolicy = new TaxesPolicy();
 		taxesPolicy.add(new BaseSaleTax());
 		taxesPolicy.add(new ImportDutySaleTax());
 
-		assertEquals(expectedTaxedPrice.multiply(new BigDecimal(quantity)), orderItem.getTotalPrice(taxesPolicy));
+		assertEquals(expectedTaxedPrice.multiply(new BigDecimal(quantity)), orderItem.getTotalPrice());
 
 	}
 }

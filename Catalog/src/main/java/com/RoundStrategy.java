@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 public interface RoundStrategy {
 
-	Object round(BigDecimal initialValue);
+	BigDecimal round(BigDecimal initialValue);
 
 }
