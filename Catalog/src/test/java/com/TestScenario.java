@@ -1,9 +1,20 @@
 package com;
+
 import static org.junit.Assert.assertEquals;
+
+import java.math.BigDecimal;
 
 import org.junit.Test;
 
+import com.model.Product;
+import com.model.impl.Book;
+import com.model.impl.Food;
 import com.shop.Order;
+import com.shop.OrderItem;
+import com.shop.tax.BaseSaleTax;
+import com.shop.tax.ImportDutySaleTax;
+import com.shop.tax.SaleTaxesCalculator;
+import com.shop.tax.TaxesPolicy;
 
 public class TestScenario {
 
@@ -12,9 +23,33 @@ public class TestScenario {
 	 * 
 	 */
 	@Test
-	public void testOrder1() {
+	public void testOrderOne() {
+		TaxesPolicy taxesPolicy = new TaxesPolicy();
+		taxesPolicy.add(new BaseSaleTax());
+		taxesPolicy.add(new ImportDutySaleTax());
+		RoundStrategy roundStrategy = new FiveRoundStrategy();
 
-		assertEquals("Order 1", new Order("Order 1").getOrderName());
+		Order orderOne = new Order(new SaleTaxesCalculator(taxesPolicy, roundStrategy));
+		Book book = new Book("Clean Code", new BigDecimal("12.49"));
+
+		Product cd = new Product("cd ", new BigDecimal("14.99"));
+		Food chocolate = new Food("Italian chocolate bar", new BigDecimal("0.85"));
+
+		OrderItem bookOrderItem = new OrderItem(book, 2);
+		orderOne.add(bookOrderItem);
+		OrderItem cdOrderItem = new OrderItem(cd, 3);
+		orderOne.add(cdOrderItem);
+		OrderItem chocolateOrderItem = new OrderItem(chocolate, 4);
+		orderOne.add(chocolateOrderItem);
+
+		assertEquals(new BigDecimal("12.49"), bookOrderItem.getProductTaxedPrice(orderOne));
+		assertEquals(new BigDecimal("16.49"), cdOrderItem.getProductTaxedPrice(orderOne));
+		assertEquals(new BigDecimal("0.85"), chocolateOrderItem.getProductTaxedPrice(orderOne));
+		
+		assertEquals(new BigDecimal("12.49").multiply(new BigDecimal("2")), bookOrderItem.getTotalPrice(orderOne));
+		assertEquals(new BigDecimal("16.49").multiply(new BigDecimal("3")), cdOrderItem.getTotalPrice(orderOne));
+		assertEquals(new BigDecimal("0.85").multiply(new BigDecimal("4")), chocolateOrderItem.getTotalPrice(orderOne));
+
 	}
 
 	/**

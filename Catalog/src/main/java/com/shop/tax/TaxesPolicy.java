@@ -2,12 +2,20 @@ package com.shop.tax;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import com.model.Product;
 
 public class TaxesPolicy extends ArrayList<SaleTax> {
 
+	public TaxesPolicy(Collection<? extends SaleTax> n) {
+		super(n);
+	}
+
+	public TaxesPolicy() {
+		super();
+	}
 
 	public BigDecimal getTotalRate(Product product) {
 

@@ -13,13 +13,11 @@ public class OrderItem {
 	private int quantity;
 	private BigDecimal totalPrice;
 
-
 	private BigDecimal totalTax;
 	private BigDecimal totalAmount;
 
-
-
 	public OrderItem() {
+
 	}
 
 	public OrderItem(Product product, int quantity) {
@@ -50,15 +48,24 @@ public class OrderItem {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	public BigDecimal getTotalPrice() {
-//		SaleTaxesCalculator saleTaxesCalculator = new SaleTaxesCalculator();
-//		BigDecimal taxesAmount = saleTaxesCalculator.calculateTaxes(this.product, taxesPolicy);
-//		BigDecimal productTaxedPrice = this.product.getPrice().add(taxesAmount);
-//		this.totalPrice = productTaxedPrice.multiply(new BigDecimal(this.quantity));
-		return totalPrice;
+
+	public BigDecimal getTotalPrice(Order order) {
+		
+		BigDecimal taxesAmount = order.getSaleTaxesCalculator().calculateTaxes(this.product);
+		BigDecimal productTaxedPrice = this.product.getPrice().add(taxesAmount);
+		this.totalPrice = productTaxedPrice.multiply(new BigDecimal(this.quantity));
+		return order.getSaleTaxesCalculator().getRoundStrategy().round(totalPrice);
 	}
 
+	public BigDecimal getProductTaxedPrice(Order order) {
+		
+		BigDecimal taxesAmount = order.getSaleTaxesCalculator().calculateTaxes(this.product);
+		BigDecimal productTaxedPrice = this.product.getPrice().add(taxesAmount);
+
+		return order.getSaleTaxesCalculator().getRoundStrategy().round(productTaxedPrice);
+		
+	}
+	
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
