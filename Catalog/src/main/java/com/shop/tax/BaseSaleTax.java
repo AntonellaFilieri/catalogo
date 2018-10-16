@@ -1,6 +1,7 @@
 package com.shop.tax;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.model.Product;
@@ -9,6 +10,7 @@ import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import util.Constants;
 import util.CustomStringUtil;
+import util.PropertiesFileUtil;
 
 public class BaseSaleTax implements SaleTax {
 
@@ -27,8 +29,11 @@ public class BaseSaleTax implements SaleTax {
 
 	@Override
 	public boolean isApplicable(Product product) {
+		
+		List<String> exemptProducts = PropertiesFileUtil.getPropertyValueAsList(Constants.EXEMPT_PRODUCTS);
+		boolean isExempt = exemptProducts.stream().anyMatch(s -> exemptProducts.contains(product.getClass().getSimpleName().toLowerCase()));
 
-		return true;
+		return !isExempt;
 	}
 
 }

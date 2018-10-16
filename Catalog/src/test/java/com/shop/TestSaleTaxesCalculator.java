@@ -33,7 +33,7 @@ public class TestSaleTaxesCalculator {
 	}
 
 	@Test
-	@Parameters({ "34.697, 0.0" })
+	@Parameters({ "34.697, 0.000" })
 	public void testBaseSaleTaxOnExemptProduct(BigDecimal price, BigDecimal expectedTaxes) {
 		Book book = new Book("Clean Code", price);
 		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
@@ -42,7 +42,7 @@ public class TestSaleTaxesCalculator {
 		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(book, taxesPolicy);
 		assertEquals(expectedTaxes, calculatedTaxes);
 	}
-	
+
 	@Test
 	@Parameters({ "13.378, 0.6689" })
 	public void testImportDutySaleTaxOnProduct(BigDecimal price, BigDecimal expectedTaxes) {
@@ -53,6 +53,18 @@ public class TestSaleTaxesCalculator {
 
 		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(parfume, taxesPolicy);
 
+		assertEquals(expectedTaxes, calculatedTaxes);
+	}
+
+	@Test
+	@Parameters({ "34.697, 1.73485, IMPORTED" })
+	public void testImportDutySaleTaxOnExemptProduct(BigDecimal price, BigDecimal expectedTaxes, String productOrigin) {
+		Book book = new Book("Clean Code", price, ProductOrigin.valueOf(productOrigin));
+		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
+		TaxesPolicy taxesPolicy = new TaxesPolicy();
+		taxesPolicy.add(new BaseSaleTax());
+		taxesPolicy.add(new ImportDutySaleTax());
+		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(book, taxesPolicy);
 		assertEquals(expectedTaxes, calculatedTaxes);
 	}
 
