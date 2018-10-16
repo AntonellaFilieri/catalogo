@@ -1,4 +1,4 @@
-package com;
+package com.shop;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.FiveRoundStrategy;
+import com.RoundStrategy;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;

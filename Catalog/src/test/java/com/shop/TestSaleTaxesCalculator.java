@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import com.model.Product;
 import com.model.ProductOrigin;
+import com.model.impl.Book;
 import com.shop.tax.BaseSaleTax;
 import com.shop.tax.ImportDutySaleTax;
 import com.shop.tax.SaleTaxesCalculator;
@@ -27,12 +28,21 @@ public class TestSaleTaxesCalculator {
 		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
 		TaxesPolicy taxesPolicy = new TaxesPolicy();
 		taxesPolicy.add(new BaseSaleTax());
-
 		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(parfume, taxesPolicy);
-		
 		assertEquals(expectedTaxes, calculatedTaxes);
 	}
 
+	@Test
+	@Parameters({ "34.697, 0.0" })
+	public void testBaseSaleTaxOnExemptProduct(BigDecimal price, BigDecimal expectedTaxes) {
+		Book book = new Book("Clean Code", price);
+		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
+		TaxesPolicy taxesPolicy = new TaxesPolicy();
+		taxesPolicy.add(new BaseSaleTax());
+		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(book, taxesPolicy);
+		assertEquals(expectedTaxes, calculatedTaxes);
+	}
+	
 	@Test
 	@Parameters({ "13.378, 0.6689" })
 	public void testImportDutySaleTaxOnProduct(BigDecimal price, BigDecimal expectedTaxes) {
@@ -42,13 +52,14 @@ public class TestSaleTaxesCalculator {
 		taxesPolicy.add(new ImportDutySaleTax());
 
 		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(parfume, taxesPolicy);
-		
+
 		assertEquals(expectedTaxes, calculatedTaxes);
 	}
-	
+
 	@Test
-	@Parameters({ "25.853, 3.87795, IMPORTED" , "25.853, 2.5853, LOCAL" })
-	public void testBaseAndImportDutySaleTaxOnProduct(BigDecimal price, BigDecimal expectedTaxes, String productOrigin) {
+	@Parameters({ "25.853, 3.87795, IMPORTED", "25.853, 2.5853, LOCAL" })
+	public void testBaseAndImportDutySaleTaxOnProduct(BigDecimal price, BigDecimal expectedTaxes,
+			String productOrigin) {
 		Product product = new Product("Dior", price, ProductOrigin.valueOf(productOrigin));
 		SaleTaxesCalculator saleTaxCalculator = new SaleTaxesCalculator();
 		TaxesPolicy taxesPolicy = new TaxesPolicy();
@@ -56,8 +67,8 @@ public class TestSaleTaxesCalculator {
 		taxesPolicy.add(new BaseSaleTax());
 
 		BigDecimal calculatedTaxes = saleTaxCalculator.calculateTaxes(product, taxesPolicy);
-		
+
 		assertEquals(expectedTaxes, calculatedTaxes);
 	}
-	
+
 }

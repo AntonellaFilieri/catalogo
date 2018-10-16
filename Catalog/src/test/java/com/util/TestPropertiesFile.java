@@ -1,4 +1,4 @@
-package com;
+package com.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -54,6 +54,7 @@ public class TestPropertiesFile {
 
 		List<String> list = Arrays.stream(productList.toLowerCase().split(",")).map(String::trim)
 				.collect(Collectors.toList());
+
 		boolean matchBook = list.stream().anyMatch(s -> list.contains(Book.class.getSimpleName().toLowerCase()));
 		boolean matchFood = list.stream().anyMatch(s -> list.contains(Food.class.getSimpleName().toLowerCase()));
 		boolean matchMedical = list.stream().anyMatch(s -> list.contains(Medical.class.getSimpleName().toLowerCase()));
@@ -64,4 +65,5 @@ public class TestPropertiesFile {
 		assertTrue(matchMedical);
 		assertFalse(matchMovie);
 	}
+
 }
