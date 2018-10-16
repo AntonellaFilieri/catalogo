@@ -8,7 +8,8 @@ public class SaleTaxesCalculator {
 
 	public BigDecimal calculateTaxes(Product product, TaxesPolicy taxesPolicy) {
 		BigDecimal totalRate = taxesPolicy.getTotalRate(product);
-		return product.getPrice().multiply(totalRate).divide(new BigDecimal(100));
+		BigDecimal taxesAmount = product.getPrice().multiply(totalRate).divide(new BigDecimal(100));
+		return taxesAmount;
 	}
 
 }

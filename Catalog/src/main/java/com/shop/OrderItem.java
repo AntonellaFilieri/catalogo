@@ -3,6 +3,8 @@ package com.shop;
 import java.math.BigDecimal;
 
 import com.model.Product;
+import com.shop.tax.SaleTaxesCalculator;
+import com.shop.tax.TaxesPolicy;
 
 public class OrderItem {
 
@@ -49,8 +51,11 @@ public class OrderItem {
 		this.product = product;
 	}
 	
-	public BigDecimal getTotalPrice() {
-		this.totalPrice = this.product.getPrice().multiply(new BigDecimal(this.quantity));
+	public BigDecimal getTotalPrice(TaxesPolicy taxesPolicy) {
+		SaleTaxesCalculator saleTaxesCalculator = new SaleTaxesCalculator();
+		BigDecimal taxesAmount = saleTaxesCalculator.calculateTaxes(this.product, taxesPolicy);
+		BigDecimal productTaxedPrice = this.product.getPrice().add(taxesAmount);
+		this.totalPrice = productTaxedPrice.multiply(new BigDecimal(this.quantity));
 		return totalPrice;
 	}
 
