@@ -3,6 +3,8 @@ package com.shop.tax;
 import java.math.BigDecimal;
 import java.util.ResourceBundle;
 
+import com.model.Product;
+
 import util.Constants;
 import util.CustomStringUtil;
 
@@ -18,6 +20,11 @@ public class ImportDutySaleTax implements SaleTax {
 	@Override
 	public BigDecimal getRate() {
 		return this.rate;
+	}
+
+	@Override
+	public boolean isApplicable(Product product) {
+		return product.isImported();
 	}
 
 }

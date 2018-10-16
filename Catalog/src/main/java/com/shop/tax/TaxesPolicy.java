@@ -3,22 +3,21 @@ package com.shop.tax;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+
+import com.model.Product;
 
 public class TaxesPolicy extends ArrayList<SaleTax> {
 
-	public void setTax(SaleTax saleTax) {
 
-	}
-
-	public BigDecimal getTotalRate() {
+	public BigDecimal getTotalRate(Product product) {
 
 		BigDecimal totalRate = new BigDecimal("0");
 		Iterator<SaleTax> saleTaxtIterator = this.iterator();
 		while (saleTaxtIterator.hasNext()) {
-			SaleTax partialRate = saleTaxtIterator.next();
-			totalRate = totalRate.add(partialRate.getRate());
-			
+			SaleTax saleTax = saleTaxtIterator.next();
+			if (saleTax.isApplicable(product)) {
+				totalRate = totalRate.add(saleTax.getRate());
+			}
 		}
 		return totalRate;
 	}
